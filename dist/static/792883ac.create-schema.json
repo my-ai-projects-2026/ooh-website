@@ -1,0 +1,1036 @@
+[
+  {
+    "of": [
+      {
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bullet"
+          }
+        ],
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "validation": [
+                    {
+                      "level": "error",
+                      "rules": [
+                        {
+                          "flag": "uri",
+                          "constraint": {
+                            "options": {
+                              "scheme": [
+                                "/^http$/",
+                                "/^https$/"
+                              ],
+                              "allowRelative": false,
+                              "relativeOnly": false,
+                              "allowCredentials": false
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "name": "href",
+                  "type": "url",
+                  "title": "URL"
+                }
+              ],
+              "name": "link",
+              "type": "object",
+              "title": "URL"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Emphasis"
+            }
+          ]
+        },
+        "of": [],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Normal"
+          },
+          {
+            "value": "h1",
+            "title": "H1"
+          },
+          {
+            "value": "h2",
+            "title": "H2"
+          },
+          {
+            "value": "h3",
+            "title": "H3"
+          },
+          {
+            "value": "h4",
+            "title": "H4"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          }
+        ],
+        "type": "block"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative Text"
+          }
+        ],
+        "type": "image"
+      }
+    ],
+    "name": "blockContent",
+    "type": "array"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      }
+    ],
+    "name": "category",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "to": [
+          {
+            "type": "author"
+          }
+        ],
+        "name": "author",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "category"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to category"
+          }
+        ],
+        "name": "categories",
+        "type": "array"
+      },
+      {
+        "name": "publishedAt",
+        "type": "datetime"
+      },
+      {
+        "name": "body",
+        "type": "blockContent"
+      }
+    ],
+    "name": "post",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "name"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "bio",
+        "type": "array"
+      }
+    ],
+    "name": "author",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "address",
+        "type": "string"
+      },
+      {
+        "name": "phone",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "title": "Email Address"
+      },
+      {
+        "name": "tagline",
+        "type": "string",
+        "title": "Company Tagline"
+      },
+      {
+        "rows": 4,
+        "name": "mission",
+        "type": "text",
+        "title": "Mission Statement"
+      },
+      {
+        "rows": 4,
+        "name": "vision",
+        "type": "text",
+        "title": "Vision Statement"
+      },
+      {
+        "rows": 4,
+        "name": "values",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "value",
+                "type": "string"
+              },
+              {
+                "name": "label",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "stats",
+        "type": "array",
+        "title": "Company Stats"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "Lucide icon name e.g. Award, Shield, Users, Target, Eye, Zap",
+                "name": "icon",
+                "type": "string",
+                "title": "Icon Name (Lucide)"
+              },
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "name": "description",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "coreValues",
+        "type": "array"
+      },
+      {
+        "fields": [
+          {
+            "validation": [
+              {
+                "level": "error",
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "name": "facebook",
+            "type": "url",
+            "title": "Facebook URL"
+          },
+          {
+            "validation": [
+              {
+                "level": "error",
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "name": "linkedin",
+            "type": "url",
+            "title": "LinkedIn URL"
+          },
+          {
+            "validation": [
+              {
+                "level": "error",
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "name": "twitter",
+            "type": "url",
+            "title": "Twitter / X URL"
+          },
+          {
+            "validation": [
+              {
+                "level": "error",
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "name": "instagram",
+            "type": "url",
+            "title": "Instagram URL"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "object",
+        "title": "Social Media Links"
+      }
+    ],
+    "name": "businessInfo",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "Short label shown above the headline e.g. 'Infrastructure & Network'",
+        "name": "tag",
+        "type": "string",
+        "title": "Tag / Eyebrow"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Headline"
+      },
+      {
+        "rows": 3,
+        "name": "subtitle",
+        "type": "text",
+        "title": "Subheading"
+      },
+      {
+        "name": "ctaLabel",
+        "type": "string",
+        "title": "Primary CTA Label"
+      },
+      {
+        "name": "ctaHref",
+        "type": "string",
+        "title": "Primary CTA Link"
+      },
+      {
+        "name": "ctaSecondaryLabel",
+        "type": "string",
+        "title": "Secondary CTA Label"
+      },
+      {
+        "name": "ctaSecondaryHref",
+        "type": "string",
+        "title": "Secondary CTA Link"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Background Image"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "heroSlide",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Service Title"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "description": "Use a valid Lucide icon name e.g. Network, Sun, Code2, TrendingUp, Truck, Cable",
+        "name": "icon",
+        "type": "string",
+        "title": "Icon Name (Lucide)"
+      },
+      {
+        "rows": 2,
+        "description": "Used in service cards on the homepage",
+        "name": "shortDescription",
+        "type": "text"
+      },
+      {
+        "description": "Detailed description for the services page",
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "longDescription",
+        "type": "array",
+        "title": "Full Description"
+      },
+      {
+        "description": "Bullet points shown on the services page",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "features",
+        "type": "array",
+        "title": "Key Features"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "heroImage",
+        "type": "image",
+        "title": "Service Image"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "service",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Client Name"
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "title": "Position / Title"
+      },
+      {
+        "name": "company",
+        "type": "string"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "quote",
+        "type": "text",
+        "title": "Testimonial Quote"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 5
+              }
+            ]
+          }
+        ],
+        "name": "rating",
+        "type": "number",
+        "title": "Rating (1–5)"
+      },
+      {
+        "description": "e.g. Delivery Service, Solar Installation",
+        "name": "serviceTag",
+        "type": "string",
+        "title": "Service Category"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "avatar",
+        "type": "image",
+        "title": "Client Photo"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "testimonial",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Full Name"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "position",
+        "type": "string",
+        "title": "Position / Title"
+      },
+      {
+        "name": "department",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "bio",
+        "type": "text",
+        "title": "Short Bio"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "photo",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "linkedIn",
+        "type": "url",
+        "title": "LinkedIn URL"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "teamMember",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1900
+              },
+              {
+                "flag": "max",
+                "constraint": 2100
+              }
+            ]
+          }
+        ],
+        "name": "year",
+        "type": "number"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Milestone Title"
+      },
+      {
+        "rows": 3,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "milestone",
+    "type": "document"
+  }
+]
