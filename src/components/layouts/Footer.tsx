@@ -1,7 +1,6 @@
-"use client";
+
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   MapPin,
   Phone,
@@ -11,8 +10,8 @@ import {
   MessageCircle,
   Camera,
   Briefcase,
-  ArrowUpRight,
 } from "lucide-react";
+import { getBusinessInfo } from "@/lib/actions/info.action";
 
 const footerNav = [
   { label: "Home", href: "/" },
@@ -22,10 +21,11 @@ const footerNav = [
 ];
 
 const footerServices = [
-  { label: "Infra & Network", href: "/services#infra" },
-  { label: "Solar Installation", href: "/services#solar" },
-  { label: "Software Development", href: "/services#software" },
-  { label: "Finance Consulting", href: "/services#finance" },
+  { label: "Delivery Service", href: "/services" },
+  { label: "Solar Panel Installation", href: "/services" },
+  { label: "Finance Consulting", href: "/services" },
+  { label: "Web & Mobile Development", href: "/services" },
+  { label: "Network Infrastructure", href: "/services" },
 ];
 
 const socials = [
@@ -35,16 +35,18 @@ const socials = [
   { icon: Briefcase, href: "#", label: "LinkedIn" },
 ];
 
-export default function Footer() {
-  return (
-    <footer className="bg-[var(--navy)] text-white relative overflow-hidden">
-      {/* Decorative gold line */}
-      <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
+export default async function Footer() {
 
+  const {address, phone, email} = await getBusinessInfo();
+  
+  return (
+    <footer className="bg-navy text-white relative overflow-hidden">
+      {/* Decorative gold line */}
+      <div className="h-0.5 w-full bg-linear-to-r from-transparent via-gold to-transparent" />
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[var(--gold)]/5 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-[var(--gold)]/8 blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gold/5 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-gold/8 blur-3xl" />
       </div>
 
       <div className="container-ooh py-16 relative z-10">
@@ -60,7 +62,7 @@ export default function Footer() {
                   <path d="M40 16 L40 32" stroke="var(--gold-light)" strokeWidth="3" strokeLinecap="round" opacity="0.7"/>
                 </svg>
               </div>
-              <span className="text-2xl font-heading font-bold text-[var(--gold)]">OOH</span>
+              <span className="text-2xl font-heading font-bold text-gold">OOH</span>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-6">
               Delivering excellence across infrastructure, solar energy, software solutions, and financial consulting.
@@ -71,7 +73,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-sm border border-white/10 flex items-center justify-center text-white/50 hover:text-[var(--gold)] hover:border-[var(--gold)]/50 transition-all duration-300 hover:-translate-y-0.5"
+                  className="w-9 h-9 rounded-sm border border-white/10 flex items-center justify-center text-white/50 hover:text-gold hover:border-gold/50 transition-all duration-300 hover:-translate-y-0.5"
                 >
                   <Icon size={15} />
                 </a>
@@ -81,7 +83,7 @@ export default function Footer() {
 
           {/* Col 2: Navigation */}
           <div>
-            <h4 className="text-sm font-semibold tracking-widest text-[var(--gold)] uppercase mb-5">
+            <h4 className="text-sm font-semibold tracking-widest text-gold uppercase mb-5">
               Navigation
             </h4>
             <ul className="space-y-3">
@@ -89,9 +91,9 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-white/50 text-sm hover:text-[var(--gold)] transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-white/50 text-sm hover:text-(--gold) transition-colors duration-200 flex items-center gap-2 group"
                   >
-                    <span className="w-0 group-hover:w-3 h-px bg-[var(--gold)] transition-all duration-300" />
+                    <span className="w-0 group-hover:w-3 h-px bg-(--gold) transition-all duration-300" />
                     {link.label}
                   </Link>
                 </li>
@@ -101,17 +103,17 @@ export default function Footer() {
 
           {/* Col 3: Services */}
           <div>
-            <h4 className="text-sm font-semibold tracking-widest text-[var(--gold)] uppercase mb-5">
+            <h4 className="text-sm font-semibold tracking-widest text-gold uppercase mb-5">
               Our Services
             </h4>
             <ul className="space-y-3">
-              {footerServices.map((link) => (
-                <li key={link.href}>
+              {footerServices.map((link, index) => (
+                <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-white/50 text-sm hover:text-[var(--gold)] transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-white/50 text-sm hover:text-(--gold) transition-colors duration-200 flex items-center gap-2 group"
                   >
-                    <span className="w-0 group-hover:w-3 h-px bg-[var(--gold)] transition-all duration-300" />
+                    <span className="w-0 group-hover:w-3 h-px bg-(--gold) transition-all duration-300" />
                     {link.label}
                   </Link>
                 </li>
@@ -121,24 +123,24 @@ export default function Footer() {
 
           {/* Col 4: Contact */}
           <div>
-            <h4 className="text-sm font-semibold tracking-widest text-[var(--gold)] uppercase mb-5">
+            <h4 className="text-sm font-semibold tracking-widest text-gold uppercase mb-5">
               Contact Us
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-white/50">
-                <MapPin size={15} className="text-[var(--gold)] mt-0.5 shrink-0" />
-                <span>123 Business Tower, Ayala Ave., Makati City, Philippines</span>
+                <MapPin size={15} className="text-gold mt-0.5 shrink-0" />
+                <span>{address}</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/50">
-                <Phone size={15} className="text-[var(--gold)] shrink-0" />
-                <a href="tel:+639123456789" className="hover:text-[var(--gold)] transition-colors">+63 912 345 6789</a>
+                <Phone size={15} className="text-gold shrink-0" />
+                <a href={`tel:${phone}`} className="hover:text-gold transition-colors">{phone}</a>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/50">
-                <Mail size={15} className="text-[var(--gold)] shrink-0" />
-                <a href="mailto:info@ooh.com.ph" className="hover:text-[var(--gold)] transition-colors">info@ooh.com.ph</a>
+                <Mail size={15} className="text-gold shrink-0" />
+                <a href={`mailto:${email}`} className="hover:text-gold transition-colors">{email}</a>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/50">
-                <Clock size={15} className="text-[var(--gold)] shrink-0" />
+                <Clock size={15} className="text-gold shrink-0" />
                 <span>Mon–Fri: 08:00–18:00</span>
               </li>
             </ul>
@@ -153,9 +155,9 @@ export default function Footer() {
             © {new Date().getFullYear()} OOH. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
-            <Link href="#" className="text-white/30 text-xs hover:text-[var(--gold)] transition-colors">Privacy Policy</Link>
-            <Link href="#" className="text-white/30 text-xs hover:text-[var(--gold)] transition-colors">Terms of Service</Link>
-            <Link href="#" className="text-white/30 text-xs hover:text-[var(--gold)] transition-colors">Sitemap</Link>
+            <Link href="#" className="text-white/30 text-xs hover:text-gold transition-colors">Privacy Policy</Link>
+            <Link href="#" className="text-white/30 text-xs hover:text-gold transition-colors">Terms of Service</Link>
+            <Link href="#" className="text-white/30 text-xs hover:text-gold transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>
