@@ -2,7 +2,8 @@ import ContactForm from "@/features/home/components/contacts/contact-form";
 import ContactInfo from "@/features/home/components/contacts/contact-info";
 import { getBusinessInfo } from "@/lib/actions/info.action";
 import { getServices } from "@/lib/actions/services.action";
-import { MapPin, Globe, MessageCircle, Camera, Briefcase } from "lucide-react";
+import { Globe, MessageCircle, Camera, Briefcase } from "lucide-react";
+import AddressMap from "@/components/shared/AddressMap";
 
 interface ContactPageProps {
   address?: string;
@@ -63,15 +64,7 @@ function ContactPageContent({ address, phone, email, serviceOptions, socialLinks
       <section className="py-16 bg-white">
         <div className="container-ooh">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            {/* Map placeholder */}
-            {address && (
-              <div className="rounded-sm overflow-hidden border border-slate-100 shadow-sm h-64 bg-[var(--surface)] flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin size={32} className="text-[var(--gold)] mx-auto mb-2" />
-                  <p className="text-slate-500 text-sm">{address}</p>
-                </div>
-              </div>
-            )}
+           
 
             {/* Social Links */}
             {socials.length > 0 && (
@@ -94,6 +87,10 @@ function ContactPageContent({ address, phone, email, serviceOptions, socialLinks
                 </div>
               </div>
             )}
+          </div>
+          <div className="w-full">
+             {/* Map */}
+            {address && <AddressMap address={address} />}
           </div>
         </div>
       </section>

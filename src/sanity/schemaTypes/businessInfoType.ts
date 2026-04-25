@@ -7,6 +7,12 @@ export const businessInfoType = defineType({
   icon: MobileDeviceIcon,
   type: "document",
   fields: [
+    defineField({
+      name: "logo",
+      title: "Company Logo",
+      type: "image",
+      options: { hotspot: true },
+    }),
     defineField({ name: "address", title: "Address", type: "string" }),
     defineField({ name: "phone", title: "Phone", type: "string" }),
     defineField({ name: "email", title: "Email Address", type: "string" }),
@@ -14,6 +20,27 @@ export const businessInfoType = defineType({
     defineField({ name: "mission", title: "Mission Statement", type: "text", rows: 4 }),
     defineField({ name: "vision", title: "Vision Statement", type: "text", rows: 4 }),
     defineField({ name: "values", title: "Values", type: "text", rows: 4 }),
+    defineField({
+      name: "introduction",
+      title: "Introduction",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Rich-text introduction shown on the About / Home page.",
+    }),
+    defineField({
+      name: "history",
+      title: "History",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Company history — supports headings, bold, lists, links, etc.",
+    }),
+    defineField({
+      name: "background",
+      title: "Background",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Company background & context — supports headings, bold, lists, links, etc.",
+    }),
     defineField({
       name: "stats",
       title: "Company Stats",

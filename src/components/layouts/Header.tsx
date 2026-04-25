@@ -6,7 +6,7 @@ import { getBusinessInfo } from "@/lib/actions/info.action";
 
 export default async function Header() {
 
-  const {email,phone} = await getBusinessInfo();
+  const {email,phone, logo} = await getBusinessInfo();
 
   return (
     <>
@@ -23,7 +23,7 @@ export default async function Header() {
         </div>
       </div>
 
-     <NavigationComponent />
+     <NavigationComponent logo={logo} />
      
       
     </>

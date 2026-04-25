@@ -10,6 +10,9 @@ import { serviceType } from './serviceType'
 import { testimonialType } from './testimonialType'
 import { teamMemberType } from './teamMemberType'
 import { milestoneType } from './milestoneType'
+import { projectType } from './projectType'
+import { partnerType } from './partnerType'
+
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -23,5 +26,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     testimonialType,
     teamMemberType,
     milestoneType,
+    projectType,
+    partnerType,
   ],
 }

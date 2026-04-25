@@ -1,4 +1,5 @@
-import { Target, Eye, Award, Users, Truck, Sun, TrendingUp, Code2, Cable, CheckCircle, Shield, Zap, Star, Globe } from "lucide-react";
+import { Target, Eye, Award, Users, Truck, Sun, TrendingUp, Code2, Cable, CheckCircle, Shield, Zap, Star, Globe, Handshake, BicepsFlexed, Blocks, HandPlatter } from "lucide-react";
+import { PortableText } from "@portabletext/react";
 import CardClassic from "@/components/shared/cards/card-classic";
 import { TeamMember, Milestone, BusinessAbout, CoreValue } from "@/lib/actions/about.action";
 import { Service } from "@/lib/actions/services.action";
@@ -8,6 +9,7 @@ interface AboutContentProps {
   milestones: Milestone[];
   businessAbout: BusinessAbout | null;
   services: Service[];
+ 
 }
 
 const serviceIconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -16,9 +18,11 @@ const serviceIconMap: Record<string, React.ComponentType<{ size?: number; classN
 
 const coreValueIconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Award, Users, Target, Eye, Shield, Zap, Star, Globe, CheckCircle, TrendingUp,
+  Handshake,BicepsFlexed,Blocks,HandPlatter
 };
 
 function CoreValueIcon({ name }: { name?: string }) {
+  
   const Icon = (name && coreValueIconMap[name]) ? coreValueIconMap[name] : Award;
   return <Icon size={22} className="text-[var(--gold-dark)]" />;
 }
@@ -55,43 +59,67 @@ export default function AboutContent({ teamMembers, milestones, businessAbout, s
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[var(--surface)] to-transparent" />
       </section>
 
-      {/* Who We Are */}
-      <section className="section-padding bg-[var(--surface)]">
-        <div className="container-ooh">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="h-px w-10 bg-[var(--gold)]" />
-                <span className="text-[var(--gold)] text-xs tracking-widest uppercase font-semibold">Our Story</span>
-              </div>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--navy)] mb-6">
-                A Multi-Service Enterprise Built on Trust
-              </h2>
-              <p className="text-slate-500 leading-relaxed mb-4">
-                OOH started as a logistics company in 2013, driven by a simple idea: businesses deserve a partner they can trust. Over the years, we expanded into solar energy, finance consulting, digital development, and network infrastructure — driven by our clients&apos; evolving needs.
-              </p>
-              <p className="text-slate-500 leading-relaxed">
-                Today, we are a fully integrated multi-service company serving clients across the Philippines, delivering measurable results in every industry we operate in.
-              </p>
+      {/* Introduction */}
+      {businessAbout?.introduction && businessAbout.introduction.length > 0 && (
+        <section className="section-padding bg-[var(--surface)]">
+          <div className="container-ooh">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-px w-8 bg-[var(--gold)]" />
+              <span className="text-[var(--gold)] text-xs tracking-widest uppercase font-semibold">Introduction</span>
             </div>
-
-            {/* Stats Card */}
-            {businessAbout?.stats && businessAbout.stats.length > 0 && (
-              <div className="bg-white rounded-sm shadow-lg shadow-slate-200/80 border border-slate-100 p-8">
-                <h3 className="font-heading text-lg font-semibold text-[var(--navy)] mb-6">OOH at a Glance</h3>
-                <div className="grid grid-cols-2 gap-6">
-                  {businessAbout.stats.map((stat, i) => (
-                    <div key={i} className="border-l-2 border-[var(--gold)]/30 pl-4">
-                      <p className="text-3xl font-bold text-[var(--gold)] font-heading">{stat.value}</p>
-                      <p className="text-slate-500 text-sm mt-1">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            <div className="prose prose-slate max-w-none prose-headings:font-heading prose-headings:text-[var(--navy)] prose-a:text-[var(--gold)]">
+              <PortableText value={businessAbout.introduction} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {/* History */}
+      {businessAbout?.history && businessAbout.history.length > 0 && (
+        <section className="section-padding bg-[var(--surface)]">
+          <div className="container-ooh">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-px w-8 bg-[var(--gold)]" />
+              <span className="text-[var(--gold)] text-xs tracking-widest uppercase font-semibold">Our History</span>
+            </div>
+            <div className="prose prose-slate max-w-none prose-headings:font-heading prose-headings:text-[var(--navy)] prose-a:text-[var(--gold)]">
+              <PortableText value={businessAbout.history} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Background */}
+      {businessAbout?.background && businessAbout.background.length > 0 && (
+        <section className="section-padding bg-white">
+          <div className="container-ooh">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-px w-8 bg-[var(--gold)]" />
+              <span className="text-[var(--gold)] text-xs tracking-widest uppercase font-semibold">Background</span>
+            </div>
+            <div className="prose prose-slate max-w-none prose-headings:font-heading prose-headings:text-[var(--navy)] prose-a:text-[var(--gold)]">
+              <PortableText value={businessAbout.background} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Stats */}
+      {businessAbout?.stats && businessAbout.stats.length > 0 && (
+        <section className="section-padding bg-[var(--surface)]">
+          <div className="container-ooh">
+            <h3 className="font-heading text-lg font-semibold text-[var(--navy)] mb-8">OOH at a Glance</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+              {businessAbout.stats.map((stat, i) => (
+                <div key={i} className="border-l-2 border-[var(--gold)]/30 pl-4">
+                  <p className="text-3xl font-bold text-[var(--gold)] font-heading">{stat.value}</p>
+                  <p className="text-slate-500 text-sm mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Mission / Vision / Values */}
       <section className="section-padding bg-white">

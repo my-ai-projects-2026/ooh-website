@@ -7,6 +7,7 @@ import { Menu, X, Search } from "lucide-react";
 import SearchComponent from "./SearchComponent";
 import NavMobileComponent from "./NavMobileComponent";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 export const navLinks = [
   { label: "Home", href: "/" },
@@ -15,14 +16,18 @@ export const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const NavigationComponent = () => {
+interface NavigationProps {
+  logo?: string | null;
+}
+
+const NavigationComponent = ({ logo }: NavigationProps) => {
   const [scrolled, setScrolled] = useState(false);
    const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [, startTransition] = useTransition();
   const pathname = usePathname();
-
+ 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
@@ -40,8 +45,8 @@ const NavigationComponent = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "glass shadow-md shadow-[var(--navy)]/10 top-0"
-            : "bg-white/60 backdrop-blur-sm top-8 md:top-8"
+            ? "bg-white shadow-md shadow-[var(--navy)]/10 top-0"
+            : "bg-white top-8 md:top-8"
         }`}
         style={{ top: scrolled ? 0 : undefined }}
       >
@@ -49,6 +54,15 @@ const NavigationComponent = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 md:w-12 md:h-12">
+              {logo ? (
+                
+                <Image
+                  src={logo}
+                  alt="OOH logo"
+                  className="w-full h-full object-contain rounded-full"
+                  fill
+                />
+              ) : (
               <svg
                 viewBox="0 0 48 48"
                 fill="none"
@@ -76,13 +90,9 @@ const NavigationComponent = () => {
                   opacity="0.7"
                 />
               </svg>
+              )}
             </div>
-            <div>
-              <span className="text-2xl md:text-3xl font-heading font-bold text-[var(--navy)] tracking-wider group-hover:text-[var(--gold)] transition-colors duration-300">
-                OOH
-              </span>
-              <div className="h-0.5 w-0 group-hover:w-full bg-[var(--gold)] transition-all duration-500" />
-            </div>
+            
           </Link>
 
           {/* Desktop Nav */}

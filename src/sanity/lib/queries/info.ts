@@ -5,5 +5,11 @@ export const BUSINESS_ADDRESS = defineQuery(`*[_type == "post" && slug.current =
 }`)
 
 export const BUSINESS_INFO = defineQuery(`*[_type == "businessInfo"][0]{
-  address, phone, email, tagline, socialLinks
+  address, phone, email, tagline, socialLinks, logo { asset-> { url } },
+  introduction[]{..., markDefs[]{..., _type == "internalLink" => { "slug": @.slug.current } }},
+  history[]{..., markDefs[]{..., _type == "internalLink" => { "slug": @.slug.current } }},
+  background[]{..., markDefs[]{..., _type == "internalLink" => { "slug": @.slug.current } }},
 }`)
+
+
+

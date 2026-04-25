@@ -14,6 +14,6 @@ export interface HeroSlide {
 }
 
 export const getHeroSlides = async (): Promise<HeroSlide[]> => {
-  const slides = await client.fetch(HERO_SLIDES_QUERY, {}, { next: { revalidate: 60 } });
+  const slides = await client.fetch<HeroSlide[]>(HERO_SLIDES_QUERY, {}, { next: { revalidate: 60 } });
   return slides ?? [];
 };

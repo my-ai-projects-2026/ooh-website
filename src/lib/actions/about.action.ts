@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import { TEAM_QUERY, MILESTONES_QUERY, BUSINESS_ABOUT_QUERY } from "@/sanity/lib/queries/about";
+import { PortableTextBlock } from "@portabletext/types";
 
 export interface TeamMember {
   _id: string;
@@ -34,6 +35,9 @@ export interface BusinessAbout {
   values?: string;
   stats?: { value: string; label: string }[];
   coreValues?: CoreValue[];
+  introduction?: PortableTextBlock[];
+  history?: PortableTextBlock[];
+  background?: PortableTextBlock[];
 }
 
 export const getTeamMembers = async (): Promise<TeamMember[]> => {
@@ -48,5 +52,7 @@ export const getMilestones = async (): Promise<Milestone[]> => {
 
 export const getBusinessAbout = async (): Promise<BusinessAbout> => {
   const info = await client.fetch(BUSINESS_ABOUT_QUERY, {}, { next: { revalidate: 60 } });
+
+  
   return info ?? {};
 };

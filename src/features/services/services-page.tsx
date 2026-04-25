@@ -1,4 +1,5 @@
 import { Truck, Sun, TrendingUp, Code2, Cable, CheckCircle, ArrowRight, Shield, Clock, Users } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { Service } from "@/lib/actions/services.action";
 
@@ -72,6 +73,7 @@ export default function ServicesPage({ services }: ServicesPageProps) {
           {services.length > 0 ? (
             <div className="space-y-8">
               {services.map((service, i) => {
+                const imageUrl = service.heroImage?.asset ?? undefined;
                 const IconComponent = iconMap[service.icon ?? ""] ?? Truck;
                 const accent = serviceAccents[i % serviceAccents.length];
                 const isEven = i % 2 === 0;
@@ -82,20 +84,35 @@ export default function ServicesPage({ services }: ServicesPageProps) {
                     className="bg-white rounded-sm border border-slate-100 shadow-sm shadow-slate-200/80 overflow-hidden"
                   >
                     <div className={`grid grid-cols-1 lg:grid-cols-5 ${!isEven ? "lg:flex-row-reverse" : ""}`}>
-                      {/* Icon side */}
-                      <div className={`lg:col-span-1 ${accent.bg} ${accent.border} border-r flex items-center justify-center p-10`}>
-                        <div>
-                          <div className="w-16 h-16 rounded-sm bg-white/80 border border-white/50 flex items-center justify-center mb-3 mx-auto shadow-sm">
-                            <IconComponent size={28} className={accent.icon} />
-                          </div>
-                          <p className="text-xs text-center text-slate-400 font-medium tracking-wider uppercase">
-                            0{i + 1}
-                          </p>
+                      {/* Image / icon side */}
+                      {imageUrl ? (
+                        <div className={`lg:col-span-2 relative min-h-56 lg:min-h-full ${accent.bg} ${accent.border} border-r overflow-hidden`}>
+                          <Image
+                            src={imageUrl.url}
+                            alt={service.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 1024px) 100vw, 40vw"
+                          />
+                          {/* Gradient overlay */}
+                          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/10 to-transparent" />
+                         
                         </div>
-                      </div>
+                      ) : (
+                        <div className={`lg:col-span-1 ${accent.bg} ${accent.border} border-r flex items-center justify-center p-10`}>
+                          <div>
+                            <div className="w-16 h-16 rounded-sm bg-white/80 border border-white/50 flex items-center justify-center mb-3 mx-auto shadow-sm">
+                              <IconComponent size={28} className={accent.icon} />
+                            </div>
+                            <p className="text-xs text-center text-slate-400 font-medium tracking-wider uppercase">
+                              0{i + 1}
+                            </p>
+                          </div>
+                        </div>
+                      )}
 
                       {/* Content */}
-                      <div className="lg:col-span-4 p-8 md:p-10 flex flex-col md:flex-row md:items-start gap-8">
+                      <div className={`${imageUrl ? "lg:col-span-3" : "lg:col-span-4"} p-8 md:p-10 flex flex-col md:flex-row md:items-start gap-8`}>
                         <div className="flex-1">
                           <h2 className="font-heading text-2xl font-bold text-[var(--navy)] mb-3">{service.title}</h2>
                           <p className="text-slate-500 leading-relaxed mb-6">{service.shortDescription}</p>

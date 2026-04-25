@@ -33,6 +33,7 @@ interface ContactFormProps {
 const ContactForm = ({ services }: ContactFormProps) => {
   const serviceOptions = services ?? [];
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -43,8 +44,16 @@ const ContactForm = ({ services }: ContactFormProps) => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1200));
-    console.log(data);
+    setError(null);
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      setError("Something went wrong. Please try again or contact us directly.");
+      return;
+    }
     setSubmitted(true);
     reset();
     setTimeout(() => setSubmitted(false), 5000);
@@ -149,6 +158,10 @@ const ContactForm = ({ services }: ContactFormProps) => {
               <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
             )}
           </div>
+
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
 
           <Button
             type="submit"

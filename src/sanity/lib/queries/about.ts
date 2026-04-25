@@ -33,6 +33,9 @@ export const BUSINESS_ABOUT_QUERY = defineQuery(`
     vision,
     values,
     stats,
+    introduction []{..., markDefs[]{..., _type == "internalLink" => { "slug": @.slug.current } }},
+    history []{..., markDefs[]{..., _type == "internalLink" => { "slug": @.slug.current } }},
+    background []{..., markDefs[]{..., _type == "internalLink" => { "slug": @.slug.current } }},
     coreValues[] {
       icon,
       title,

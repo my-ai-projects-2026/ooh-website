@@ -12,6 +12,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { getBusinessInfo } from "@/lib/actions/info.action";
+import Image from "next/image";
 
 const footerNav = [
   { label: "Home", href: "/" },
@@ -37,7 +38,7 @@ const socials = [
 
 export default async function Footer() {
 
-  const {address, phone, email} = await getBusinessInfo();
+  const {address, phone, email,logo} = await getBusinessInfo();
   
   return (
     <footer className="bg-navy text-white relative overflow-hidden">
@@ -55,17 +56,21 @@ export default async function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10">
-                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                  <rect width="48" height="48" rx="6" fill="var(--navy)" />
-                  <path d="M8 16 L8 32 M8 24 L16 24 M16 16 L16 32" stroke="var(--gold)" strokeWidth="3" strokeLinecap="round"/>
-                  <path d="M22 24 C22 19.581 25.134 16 29 16 C32.866 16 36 19.581 36 24 C36 28.418 32.866 32 29 32 C25.134 32 22 28.418 22 24Z" stroke="var(--gold)" strokeWidth="3" fill="none"/>
-                  <path d="M40 16 L40 32" stroke="var(--gold-light)" strokeWidth="3" strokeLinecap="round" opacity="0.7"/>
-                </svg>
+                {logo ? (
+                  <Image src={logo} alt="OOH Logo" className="w-full h-full object-cover" width={40} height={40} />
+                ) : (
+                  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                    <rect width="48" height="48" rx="6" fill="var(--navy)" />
+                    <path d="M8 16 L8 32 M8 24 L16 24 M16 16 L16 32" stroke="var(--gold)" strokeWidth="3" strokeLinecap="round"/>
+                    <path d="M22 24 C22 19.581 25.134 16 29 16 C32.866 16 36 19.581 36 24 C36 28.418 32.866 32 29 32 C25.134 32 22 28.418 22 24Z" stroke="var(--gold)" strokeWidth="3" fill="none"/>
+                    <path d="M40 16 L40 32" stroke="var(--gold-light)" strokeWidth="3" strokeLinecap="round" opacity="0.7"/>
+                  </svg>
+                )}
               </div>
               <span className="text-2xl font-heading font-bold text-gold">OOH</span>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-6">
-              Delivering excellence across infrastructure, solar energy, software solutions, and financial consulting.
+              OOH is a leading provider of innovative solutions, dedicated to delivering exceptional service and value to our clients across various industries.
             </p>
             <div className="flex items-center gap-3">
               {socials.map(({ icon: Icon, href, label }) => (
@@ -78,7 +83,7 @@ export default async function Footer() {
                   <Icon size={15} />
                 </a>
               ))}
-            </div>
+            </div>      
           </div>
 
           {/* Col 2: Navigation */}

@@ -285,3 +285,67 @@
   background: rgba(201, 168, 76, 0.3);
   color: var(--navy);
 }
+
+/* Partner marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+@keyframes grid-shimmer {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  /* Layered wow grid: fine hairlines + accent grid + glowing intersection dots + vignette */
+  .wow-grid {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .wow-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    /* Layer order (top → bottom):
+       1. Gold glowing dots at every 80 px intersection
+       2. Bold accent grid lines at 80 px
+       3. Fine hairlines at 16 px
+    */
+    background-image:
+      radial-gradient(circle, rgba(201, 168, 76, 0.55) 1.5px, transparent 1.5px),
+      linear-gradient(rgba(201, 168, 76, 0.13) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201, 168, 76, 0.13) 1px, transparent 1px),
+      linear-gradient(rgba(201, 168, 76, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201, 168, 76, 0.045) 1px, transparent 1px);
+    background-size:
+      80px 80px,
+      80px 80px,
+      80px 80px,
+      16px 16px,
+      16px 16px;
+    animation: grid-shimmer 5s ease-in-out infinite;
+  }
+
+  /* Radial vignette: brighter centre, subtle gold warmth at edges */
+  .wow-grid::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+      ellipse 75% 85% at 50% 50%,
+      transparent 25%,
+      rgba(201, 168, 76, 0.05) 60%,
+      rgba(201, 168, 76, 0.13) 100%
+    );
+  }
+}
