@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { getBusinessInfo } from "@/lib/actions/info.action";
 import Image from "next/image";
+import { getServices } from "@/lib/actions/services.action";
 
 const footerNav = [
   { label: "Home", href: "/" },
@@ -39,6 +40,7 @@ const socials = [
 export default async function Footer() {
 
   const {address, phone, email,logo} = await getBusinessInfo();
+  const services = await getServices()
   
   return (
     <footer className="bg-navy text-white relative overflow-hidden">
@@ -112,14 +114,14 @@ export default async function Footer() {
               Our Services
             </h4>
             <ul className="space-y-3">
-              {footerServices.map((link, index) => (
+              {services.map((service, index) => (
                 <li key={index}>
                   <Link
-                    href={link.href}
+                    href={`/services`}
                     className="text-white/50 text-sm hover:text-(--gold) transition-colors duration-200 flex items-center gap-2 group"
                   >
                     <span className="w-0 group-hover:w-3 h-px bg-(--gold) transition-all duration-300" />
-                    {link.label}
+                    {service.title}
                   </Link>
                 </li>
               ))}
