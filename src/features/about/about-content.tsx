@@ -9,6 +9,7 @@ import {
 import { PortableText } from "@portabletext/react";
 import { TeamMember, Milestone, BusinessAbout, CoreValue } from "@/lib/actions/about.action";
 import { Service } from "@/lib/actions/services.action";
+import { iconMap } from "@/lib/utils";
 
 interface AboutContentProps {
   teamMembers: TeamMember[];
@@ -265,6 +266,48 @@ export default function AboutContent({ teamMembers, milestones, businessAbout, s
         </section>
       )}
 
+      {/* ── Team ──────────────────────────────────────────────── */}
+      {teamMembers.length > 0 && (
+        <section className="section-padding bg-[var(--surface)]">
+          <div className="container-ooh">
+            <FadeIn className="text-center mb-14">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <span className="h-px w-10 bg-[var(--gold)]" />
+                <span className="text-[var(--gold)] text-xs tracking-widest uppercase font-semibold">Our People</span>
+                <span className="h-px w-10 bg-[var(--gold)]" />
+              </div>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--navy)]">Meet the Team</h2>
+            </FadeIn>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+              {teamMembers.map((member, i) => (
+                <FadeIn key={member._id} delay={i * 0.06}>
+                  <div className="group bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1.5 transition-all duration-300">
+                    <div className="relative h-80 bg-gradient-to-br from-[var(--navy)] to-[var(--navy-dark)] overflow-hidden">
+                      {member.photo?.asset?.url ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={member.photo.asset.url} alt={member.name} className="w-full h-full object-cover   group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-5xl font-bold text-white/15 font-heading select-none">
+                            {member.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                          </span>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-heading font-semibold text-[var(--navy)] text-sm">{member.name}</h3>
+                      <p className="text-[var(--gold-dark)] text-xs font-medium tracking-wide uppercase mt-0.5">{member.position}</p>
+                      {member.department && <p className="text-slate-400 text-xs mt-0.5">{member.department}</p>}
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Timeline ──────────────────────────────────────────── */}
       {milestones.length > 0 && (
         <section className="section-padding bg-white">
@@ -303,47 +346,7 @@ export default function AboutContent({ teamMembers, milestones, businessAbout, s
         </section>
       )}
 
-      {/* ── Team ──────────────────────────────────────────────── */}
-      {teamMembers.length > 0 && (
-        <section className="section-padding bg-[var(--surface)]">
-          <div className="container-ooh">
-            <FadeIn className="text-center mb-14">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="h-px w-10 bg-[var(--gold)]" />
-                <span className="text-[var(--gold)] text-xs tracking-widest uppercase font-semibold">Our People</span>
-                <span className="h-px w-10 bg-[var(--gold)]" />
-              </div>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--navy)]">Meet the Team</h2>
-            </FadeIn>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-              {teamMembers.map((member, i) => (
-                <FadeIn key={member._id} delay={i * 0.06}>
-                  <div className="group bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-xl hover:shadow-slate-200/60 hover:-translate-y-1.5 transition-all duration-300">
-                    <div className="relative h-48 bg-gradient-to-br from-[var(--navy)] to-[var(--navy-dark)] overflow-hidden">
-                      {member.photo?.asset?.url ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={member.photo.asset.url} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <span className="text-5xl font-bold text-white/15 font-heading select-none">
-                            {member.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
-                          </span>
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-heading font-semibold text-[var(--navy)] text-sm">{member.name}</h3>
-                      <p className="text-[var(--gold-dark)] text-xs font-medium tracking-wide uppercase mt-0.5">{member.position}</p>
-                      {member.department && <p className="text-slate-400 text-xs mt-0.5">{member.department}</p>}
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      
 
       {/* ── Services Overview ─────────────────────────────────── */}
       <section className="section-padding relative overflow-hidden bg-[var(--navy)]">
@@ -368,7 +371,7 @@ export default function AboutContent({ teamMembers, milestones, businessAbout, s
           {services.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {services.map((s, i) => {
-                const IconComponent = serviceIconMap[s.icon ?? ""] ?? Truck;
+                const IconComponent = iconMap[s.icon ?? ""] ?? Truck;
                 return (
                   <FadeIn key={s._id} delay={i * 0.07}>
                     <div className="group border border-white/10 hover:border-[var(--gold)]/30 rounded-xl p-6 hover:bg-white/[0.04] transition-all duration-300">

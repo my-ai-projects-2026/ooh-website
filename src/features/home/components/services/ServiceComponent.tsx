@@ -3,15 +3,8 @@
 import Link from "next/link";
 import { Network, Sun, Code2, TrendingUp, Truck, Cable, ArrowRight } from "lucide-react";
 import { Service } from "@/lib/actions/services.action";
+import { iconMap } from "@/lib/utils";
 
-const iconMap: Record<string, React.ElementType> = {
-  Network,
-  Sun,
-  Code2,
-  TrendingUp,
-  Truck,
-  Cable,
-};
 
 const serviceAccents = [
   { accentColor: "bg-sky-50 border-sky-100", iconColor: "text-sky-600 bg-sky-100" },
@@ -55,6 +48,7 @@ const ServiceComponent = ({ services }: ServiceComponentProps) => {
             {/* Cards grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((service, i) => {
+                console.log("Rendering service:", service.icon);
                 const Icon = iconMap[service.icon ?? ""] ?? Network;
                 const accent = serviceAccents[i % serviceAccents.length];
                 const slug = service.slug?.current ?? service._id;
